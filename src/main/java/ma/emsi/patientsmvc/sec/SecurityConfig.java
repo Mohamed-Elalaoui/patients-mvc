@@ -26,6 +26,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin(); // formulaire par défaut
+        http.authorizeRequests().antMatchers("/delete/**","/edit/**","/save/**","/formPatient/**").hasRole("ADMIN");
+        http.authorizeRequests().antMatchers("/delete/**").hasRole("USER");
         http.authorizeRequests().anyRequest().authenticated(); //toutes les requêtes nécessitent une authentification
     }
 
